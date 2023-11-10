@@ -15,24 +15,10 @@ StaticJsonDocument<300> sensorData[numElements];
 int currentIndex = 0;
 
 // Replace with your network credentials
-const char* wifi_list[][2] = {
-  {"...","atom00001234"},
-  {"DESKTOP-3PN2UV9","atom00001234"},
-  {"@ENG-WIFI",""},
-  {"Maka",""}
-};
+const char* wifi_list[][2];
 
 String hostname = "seismat";
 
-// NTP server to request epoch time
-// const char* ntpServer = "pool.ntp.org";
-
-// Function that gets current epoch time
-// unsigned long getTime() {
-//   struct timeval tv;
-//   gettimeofday(&tv, nullptr);
-//   return tv.tv_sec * 1000000 + tv.tv_usec;
-// }
 
 // Initialize WiFi
 void initWiFi() {
@@ -85,14 +71,6 @@ void updateSensorData() {
   // Get new sensor events with the readings
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
-
-  // Check if any sensor value is 0
-  // if (a.acceleration.x == 0 || a.acceleration.y == 0 || a.acceleration.z == 0 ||
-  //     g.gyro.x == 0 || g.gyro.y == 0 || g.gyro.z == 0) {
-  //   Serial.println("Output 0 ...Restarting");
-  //   // Restart Arduino
-  //   ESP.restart();
-  // }
   
   // Create a JSON object
   JsonObject jsonData = sensorData[currentIndex].to<JsonObject>();
@@ -112,7 +90,6 @@ void updateSensorData() {
 void setup(void) {
   Serial.begin(115200);
   initWiFi();
-  // configTime(0, 0, ntpServer);
   while (!Serial) {
     delay(10); // will pause Zero, Leonardo, etc until serial console opens
   }
