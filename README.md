@@ -23,4 +23,4 @@ Simple Seismometer Mini Project
 - 1x Breadboard
 ## Software
 - MATLAB R2023a with Extension (Signal Processing Toolbox, Database Toolbox, Symbolic Math Toolbox) on Windows 10
-- Arduino IDE 2.2.1 on Windows 10
+- Arduino IDE 2.2.1 on Windows 10 (ArduinoJSON v6 only)
